@@ -13,7 +13,7 @@ $body = @{
     phone = '0900000000'
     service = 'System smoke test'
     subject = 'Google Apps Script smoke test'
-    description = 'Automated smoke test request to verify Google Sheets and email delivery.'
+    description = "Automated smoke test request to verify Google Sheets and email delivery. Marker $requestToken"
     deadline = ''
     budget = 'Not applicable'
     preferredContact = 'Email'
@@ -25,8 +25,9 @@ $body = @{
 }
 
 $response = Invoke-WebRequest -Uri $WebAppUrl -Method Post -Body $body -UseBasicParsing
+$successPattern = 'ok.{0,80}:true'
 
-if ($response.StatusCode -ne 200 -or $response.Content -notmatch '"ok":true') {
+if ($response.StatusCode -ne 200 -or $response.Content -notmatch $successPattern) {
     throw 'Apps Script did not confirm success. Check the deployment and Execution log.'
 }
 

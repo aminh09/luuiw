@@ -70,8 +70,9 @@ Cập nhật: 2026-09-30 (Asia/Ho_Chi_Minh)
 
 ## Cần thao tác thủ công
 
-- Chủ website cần tạo Google Sheet, deploy Apps Script và thêm `VITE_APPS_SCRIPT_URL` theo `SETUP_GOOGLE_APPS_SCRIPT.md`.
-- Việc này cần đăng nhập/cấp quyền Google nên không thể tự hoàn tất từ mã nguồn local.
+- Đã tạo Google Sheet `Luuiw Requests`, triển khai Apps Script Web App và cấp quyền cần thiết trong tài khoản `le1420445@gmail.com`.
+- Đã thêm `VITE_APPS_SCRIPT_URL` vào GitHub repository variable và deploy lại GitHub Pages.
+- Nếu sửa `Code.gs` sau này, cần tạo version mới trong Apps Script và cập nhật deployment.
 
 ## Milestone 4 — Hoàn thành
 
@@ -103,5 +104,11 @@ Cập nhật: 2026-09-30 (Asia/Ho_Chi_Minh)
 
 ## Vấn đề còn lại
 
-- Chưa có Apps Script Web App URL; chủ website phải tạo Google Sheet, deploy Apps Script và cấu hình URL sau khi mã hoàn tất.
 - Nội dung chính sách là mẫu và cần chủ website duyệt trước khi dùng chính thức.
+
+## Kiểm tra backend sau triển khai
+
+- Health check Apps Script: HTTP 200 và trả `ok: true`.
+- Smoke test đã tạo một dòng thật trong tab `Requests`, trạng thái `Chờ tiếp nhận`.
+- Email thông báo được cấu hình gửi về `le1420445@gmail.com`.
+- Lần gửi lặp lại trong 120 giây bị chặn đúng bằng cơ chế chống trùng.
