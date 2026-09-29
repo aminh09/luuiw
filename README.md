@@ -2,6 +2,9 @@
 
 Website dịch vụ hỗ trợ học tập và sản phẩm số dành cho sinh viên, được xây bằng Vite, React và TypeScript. Chủ sở hữu: Anh Minh.
 
+- Website: <https://aminh09.github.io/luuiw/>
+- Mã nguồn: <https://github.com/aminh09/luuiw>
+
 ## Tính năng giai đoạn 1
 
 - 13 dịch vụ có tìm kiếm, lọc, chi tiết và chọn nhanh.

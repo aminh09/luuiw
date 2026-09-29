@@ -1,13 +1,14 @@
 # Trạng thái dự án Luuiw
 
-Cập nhật: 2026-09-29 (Asia/Ho_Chi_Minh)
+Cập nhật: 2026-09-30 (Asia/Ho_Chi_Minh)
 
 ## Tổng quan
 
-- Trạng thái: Đang thực hiện
-- Milestone hiện tại: 5 — GitHub và triển khai
+- Trạng thái: Hoàn thành giai đoạn 1
+- Milestone hiện tại: Đã hoàn thành 5/5 milestone
 - Thư mục: `D:\project`
-- Repository dự kiến: `https://github.com/aminh09/luuiw`
+- Repository: `https://github.com/aminh09/luuiw`
+- GitHub Pages: `https://aminh09.github.io/luuiw/`
 - GitHub CLI: đã đăng nhập tài khoản `aminh09`
 
 ## Đã hoàn thành
@@ -83,6 +84,14 @@ Cập nhật: 2026-09-29 (Asia/Ho_Chi_Minh)
 - Chrome CDP tại 360, 768, 1024 và 1440px: không tràn ngang, không exception và không log lỗi.
 - Link QA: không link ngoài `_blank` thiếu `noopener noreferrer`; không anchor nội bộ hỏng.
 - Visual QA desktop và mobile: bố cục, menu, CTA, chữ và minh họa hiển thị đúng.
+
+## Milestone 5 — Hoàn thành
+
+- Khởi tạo Git, kiểm tra secret và commit toàn bộ mã nguồn giai đoạn 1.
+- Tạo repository public `aminh09/luuiw` và đẩy nhánh `main`.
+- Bật GitHub Pages với nguồn GitHub Actions.
+- Workflow build, kiểm thử và deploy đầu tiên hoàn tất thành công.
+- URL public trả HTTP 200; HTML, favicon, CSS và JavaScript đều tải đúng dưới base `/luuiw/`.
 
 ## Quyết định
 
