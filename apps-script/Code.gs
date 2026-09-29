@@ -334,7 +334,7 @@ function htmlResponse_(payload) {
   const html =
     '<!doctype html><html lang="vi"><head><meta charset="utf-8"></head>' +
     '<body><p>Luuiw đang xử lý phản hồi...</p>' +
-    '<script>window.parent.postMessage(' + safeJson + ', "*");</script>' +
+    '<script>window.top.postMessage(' + safeJson + ', "*");</script>' +
     '</body></html>';
   return HtmlService.createHtmlOutput(html)
     .setTitle('Luuiw form response')

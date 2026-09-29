@@ -112,3 +112,6 @@ Cập nhật: 2026-09-30 (Asia/Ho_Chi_Minh)
 - Smoke test đã tạo một dòng thật trong tab `Requests`, trạng thái `Chờ tiếp nhận`.
 - Email thông báo được cấu hình gửi về `le1420445@gmail.com`.
 - Lần gửi lặp lại trong 120 giây bị chặn đúng bằng cơ chế chống trùng.
+- Đã sửa phản hồi HtmlService dùng `window.top.postMessage` để trả kết quả từ iframe về trang GitHub Pages.
+- Đã cập nhật Web App lên phiên bản 2, giữ nguyên URL deployment.
+- Kiểm thử end-to-end trên production thành công: website nhận mã `ML-20260930-5PMT`, form được xóa nháp sau khi gửi và yêu cầu được ghi vào tab `Requests`.
