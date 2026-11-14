@@ -56,9 +56,9 @@ export function PolicyView({ type }: PolicyViewProps) {
               </p>
             </section>
             <section>
-              <h2>Bản nháp và bên cung cấp hạ tầng</h2>
+              <h2>Bảo mật dữ liệu và hạ tầng tiếp nhận</h2>
               <p>
-                Trong khi điền form, website lưu bản nháp tại bộ nhớ trình duyệt trên thiết bị của bạn để tránh mất nội dung; bạn có thể xóa bản nháp ngay trong form. Khi gửi thành công, bản nháp được xóa khỏi trình duyệt này. Yêu cầu được chuyển tới Google Apps Script, có thể được lưu trên Google Sheets và gửi qua hệ thống email để Luuiw tiếp nhận; việc lưu và truyền tải cũng phụ thuộc chính sách của nhà cung cấp dịch vụ.
+                Dữ liệu được nhập trên form chỉ lưu tạm thời trong phiên làm việc trên trình duyệt của bạn; khi bạn tải lại trang hoặc đóng tab, nội dung sẽ được làm mới sạch sẽ. Khi gửi thành công, yêu cầu được chuyển tới Google Apps Script, lưu trữ an toàn trên Google Sheets và gửi thông báo qua hệ thống email để Luuiw tiếp nhận; việc lưu và truyền tải cũng phụ thuộc chính sách của nhà cung cấp dịch vụ.
               </p>
             </section>
             <section>

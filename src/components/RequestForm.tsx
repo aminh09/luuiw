@@ -28,51 +28,33 @@ type SubmitState =
   | { status: 'success'; requestId: string }
   | { status: 'error'; message: string }
 
-function loadDraft(): RequestFormData {
-  try {
-    const saved = localStorage.getItem(DRAFT_KEY)
-    if (!saved) return { ...emptyRequestForm }
-    const parsed = JSON.parse(saved) as Partial<RequestFormData>
-    return { ...emptyRequestForm, ...parsed, consent: false, website: '' }
-  } catch {
-    return { ...emptyRequestForm }
-  }
-}
-
 export function RequestForm({
   selectedService,
   onServiceChange,
   estimatorBudget,
 }: RequestFormProps) {
+  // Xóa mọi bản nháp cũ trên localStorage để form luôn làm mới khi reload/mở lại trang
+  useEffect(() => {
+    try {
+      localStorage.removeItem(DRAFT_KEY)
+    } catch {
+      // ignore
+    }
+  }, [])
+
   const [data, setData] = useState<RequestFormData>(() => ({
-    ...loadDraft(),
+    ...emptyRequestForm,
     ...(estimatorBudget ? { budget: estimatorBudget.value } : {}),
   }))
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const isConfigured = Boolean(siteConfig.appsScriptUrl)
 
-
   const effectiveService = selectedService?.id ?? data.service
   const effectiveData = useMemo(
     () => ({ ...data, service: effectiveService }),
     [data, effectiveService],
   )
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const hasDraft = Boolean(
-        data.fullName || data.email || data.phone || effectiveService ||
-          data.subject || data.description || data.deadline || data.budget ||
-          data.attachmentUrl,
-      )
-      if (hasDraft) {
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(effectiveData))
-      }
-      else localStorage.removeItem(DRAFT_KEY)
-    }, 300)
-    return () => window.clearTimeout(timer)
-  }, [data, effectiveData, effectiveService])
 
   const selectedServiceName = useMemo(
     () => services.find((service) => service.id === effectiveService)?.name,
@@ -303,13 +285,13 @@ export function RequestForm({
             </button>
           ) : (
             <div className="unconfigured-submit">
-              <p>Form trực tuyến đang chờ cấu hình Google Apps Script. Nội dung bạn nhập được lưu trên thiết bị này; hãy gửi yêu cầu trực tiếp qua Messenger trong thời gian chờ.</p>
+              <p>Form trực tuyến đang chờ cấu hình Google Apps Script để nhận đơn tự động về email ({siteConfig.email}) và Google Sheets. Trong thời gian chờ, bạn có thể gửi yêu cầu trực tiếp qua Messenger:</p>
               <a className="button button--primary submit-button" href={siteConfig.messengerUrl} rel="noopener noreferrer" target="_blank">
                 Gửi yêu cầu qua Messenger <Icon name="external" size={17} />
               </a>
             </div>
           )}
-          <p className="form-footnote">Website không tải file trực tiếp. Bản nháp được lưu trên thiết bị này cho đến khi gửi thành công hoặc bạn xóa. Không gửi mật khẩu, thông tin tài chính hoặc dữ liệu nhạy cảm trong mô tả.</p>
+          <p className="form-footnote">Website không tải file trực tiếp. Khi tải lại trang hoặc thoát website, biểu mẫu sẽ được làm mới tự động. Không gửi mật khẩu, thông tin tài chính hoặc dữ liệu nhạy cảm trong mô tả.</p>
           <button
             className="text-button"
             onClick={() => {
@@ -317,11 +299,15 @@ export function RequestForm({
               setErrors({})
               setSubmitState({ status: 'idle' })
               onServiceChange(null)
-              localStorage.removeItem(DRAFT_KEY)
+              try {
+                localStorage.removeItem(DRAFT_KEY)
+              } catch {
+                // ignore
+              }
             }}
             type="button"
           >
-            Xóa nội dung và bản nháp
+            Làm mới biểu mẫu
           </button>
         </form>
       </div>
