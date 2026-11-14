@@ -37,7 +37,7 @@ export function PolicyView({ type }: PolicyViewProps) {
                 Khi bạn gửi yêu cầu, Luuiw có thể thu thập họ tên, email, số
                 điện thoại, dịch vụ quan tâm, nội dung yêu cầu, thời hạn, ngân
                 sách, phương thức liên hệ và đường dẫn tài liệu do bạn chủ động
-                cung cấp.
+                cung cấp và thông tin cơ bản về trình duyệt để hỗ trợ tiếp nhận.
               </p>
             </section>
             <section>
@@ -53,6 +53,12 @@ export function PolicyView({ type }: PolicyViewProps) {
                 Chủ sở hữu Luuiw và người hỗ trợ được ủy quyền mới được xem dữ
                 liệu. Thông tin dự kiến được lưu trong thời gian cần thiết để xử
                 lý yêu cầu và đối soát, sau đó được rà soát để xóa hoặc ẩn danh.
+              </p>
+            </section>
+            <section>
+              <h2>Bản nháp và bên cung cấp hạ tầng</h2>
+              <p>
+                Trong khi điền form, website lưu bản nháp tại bộ nhớ trình duyệt trên thiết bị của bạn để tránh mất nội dung; bạn có thể xóa bản nháp ngay trong form. Khi gửi thành công, bản nháp được xóa khỏi trình duyệt này. Yêu cầu được chuyển tới Google Apps Script, có thể được lưu trên Google Sheets và gửi qua hệ thống email để Luuiw tiếp nhận; việc lưu và truyền tải cũng phụ thuộc chính sách của nhà cung cấp dịch vụ.
               </p>
             </section>
             <section>

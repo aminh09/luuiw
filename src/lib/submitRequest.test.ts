@@ -66,6 +66,24 @@ describe('submitRequest', () => {
     vi.useRealTimers()
   })
 
+  it('bỏ qua phản hồi HTTP không an toàn ngay cả khi có token', async () => {
+    vi.useFakeTimers()
+    const promise = submitRequest(
+      'https://script.google.com/macros/s/example/exec',
+      { ...emptyRequestForm },
+      100,
+    )
+    const token = document.querySelector<HTMLInputElement>('form input[name="requestToken"]')!.value
+    window.dispatchEvent(new MessageEvent('message', {
+      origin: 'http://script.google.com',
+      data: { type: 'luuiw-form-response', requestToken: token, ok: true, requestId: 'FAKE' },
+    }))
+    const rejection = expect(promise).rejects.toBeInstanceOf(SubmissionError)
+    await vi.advanceTimersByTimeAsync(101)
+    await rejection
+    vi.useRealTimers()
+  })
+
   it('từ chối endpoint không an toàn', async () => {
     await expect(
       submitRequest('http://example.com', { ...emptyRequestForm }),

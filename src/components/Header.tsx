@@ -97,7 +97,7 @@ export function Header({ activePageIndex = 'index1', onSelectPage }: HeaderProps
                   setMenuOpen(false)
                 }}
               >
-                Check đạo văn
+                Rà soát văn bản
               </a>
             </li>
             <li>

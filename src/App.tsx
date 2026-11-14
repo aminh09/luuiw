@@ -42,6 +42,7 @@ function App() {
   const [activeService, setActiveService] = useState<Service | null>(null)
   const [selectedService, setSelectedService] = useState<Service | null>(null)
   const [index2Tab, setIndex2Tab] = useState<'form' | 'tools'>(getInitialSubTab)
+  const [estimatorBudget, setEstimatorBudget] = useState<{ value: string } | null>(null)
 
   useEffect(() => {
     const onHashChange = () => {
@@ -73,6 +74,7 @@ function App() {
   const closeModal = useCallback(() => setActiveService(null), [])
 
   const selectService = (service: Service) => {
+    setEstimatorBudget(null)
     setSelectedService(service)
     setActiveService(null)
     setIndex2Tab('form')
@@ -85,15 +87,12 @@ function App() {
 
   const handleApplyFromEstimator = (service: Service, budget: string) => {
     setSelectedService(service)
+    // Keep React as the owner of form inputs instead of mutating the DOM.
+    setEstimatorBudget({ value: budget })
     setIndex2Tab('form')
     window.location.hash = '#gui-yeu-cau'
     window.requestAnimationFrame(() => {
       document.getElementById('gui-yeu-cau')?.scrollIntoView({ behavior: 'smooth' })
-      const budgetInput = document.getElementById('budget') as HTMLInputElement | null
-      if (budgetInput) {
-        budgetInput.value = budget
-        budgetInput.dispatchEvent(new Event('input', { bubbles: true }))
-      }
     })
   }
 
@@ -139,7 +138,7 @@ function App() {
                   </div>
                   <h2>Sẵn sàng bắt đầu hoặc dùng thử bộ công cụ sinh viên?</h2>
                   <p>
-                    Gửi yêu cầu hỗ trợ hoàn thiện bài làm hoặc sử dụng bộ công cụ tính điểm GPA, rà soát đạo văn, tạo trích dẫn APA & IEEE hoàn toàn miễn phí.
+                    Gửi yêu cầu hỗ trợ hoàn thiện bài làm hoặc sử dụng bộ công cụ tính điểm GPA, rà soát cách viết, tạo trích dẫn APA & IEEE hoàn toàn miễn phí.
                   </p>
                   <div className="transition-actions">
                     <button
@@ -157,6 +156,7 @@ function App() {
                     <button
                       className="button button--secondary"
                       onClick={() => {
+                        setEstimatorBudget(null)
                         setIndex2Tab('tools')
                         switchToPage('index2')
                         window.location.hash = '#cong-cu'
@@ -184,7 +184,7 @@ function App() {
                 </div>
                 <h1>Đặt dịch vụ & Tiện ích học tập</h1>
                 <p>
-                  Gửi yêu cầu hỗ trợ hoàn thiện bài làm hoặc sử dụng bộ công cụ tính điểm GPA, rà soát đạo văn, trích dẫn khoa học ngay tại đây.
+                  Gửi yêu cầu hỗ trợ hoàn thiện bài làm hoặc sử dụng bộ công cụ tính điểm GPA, rà soát cách viết, trích dẫn khoa học ngay tại đây.
                 </p>
 
                 {/* Subtab Switcher */}
@@ -206,6 +206,7 @@ function App() {
                     aria-selected={index2Tab === 'tools'}
                     className={`index2-tab-pill ${index2Tab === 'tools' ? 'is-active' : ''}`}
                     onClick={() => {
+                      setEstimatorBudget(null)
                       setIndex2Tab('tools')
                       window.location.hash = '#cong-cu'
                     }}
@@ -224,6 +225,7 @@ function App() {
             {index2Tab === 'form' ? (
               <div className="tab-content-fade">
                 <RequestForm
+                  estimatorBudget={estimatorBudget}
                   onServiceChange={setSelectedService}
                   selectedService={selectedService}
                 />

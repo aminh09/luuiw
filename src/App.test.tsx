@@ -69,6 +69,16 @@ describe('App', () => {
     ).toHaveAttribute('target', '_blank')
   })
 
+  it('áp dụng dự toán vào form qua state và giữ dữ liệu khi chuyển tab', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: 'Mở bộ công cụ sinh viên' }))
+    await user.click(screen.getByRole('tab', { name: /Dự toán chi phí/ }))
+    const estimate = screen.getByText(/đ – /).textContent
+    await user.click(screen.getByRole('button', { name: 'Áp dụng vào Form yêu cầu' }))
+    expect(screen.getByLabelText('Ngân sách dự kiến')).toHaveValue(estimate)
+  })
+
   it('mở menu và đóng bảng liên hệ bằng Escape', async () => {
     const user = userEvent.setup()
     render(<App />)

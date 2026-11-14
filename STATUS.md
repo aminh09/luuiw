@@ -1,3 +1,17 @@
+# Cập nhật sau rà soát source 2.2.1 — 15/11/2026
+
+- Phạm vi: kiểm tra bản `project.rar` và đối chiếu báo cáo kiến trúc phiên bản 2.2.0 do người dùng cung cấp.
+- Đã sửa chức năng đưa ngân sách từ công cụ dự toán vào form; xóa bản nháp; mở rộng thông tin riêng tư.
+- Đã chuyển công cụ rà soát văn bản về đúng tính chất phân tích quy tắc nội bộ: không giả định đã quét cơ sở dữ liệu hoặc có tỷ lệ trùng lặp Turnitin/DoIT.
+- Đã sửa GPA để điểm hệ 10 chỉ tính từ điểm thật người dùng nhập; đã loại bỏ nguồn trích dẫn mẫu không có thật.
+- Đã bổ sung kiểm tra origin HTTPS cho thông điệp phản hồi từ Google Apps Script, giữ mô hình token tương quan.
+- Đã điều chỉnh các lời quảng cáo tuyệt đối trên trang chủ, giữ nguyên thiết kế tổng thể.
+- Kiểm thử tĩnh tại môi trường rà soát: TypeScript đạt, ESLint đạt; có 20 test case trong mã nguồn. Vitest và Vite build chưa chạy được trên Linux ở môi trường này do `node_modules` của archive chỉ có native binding Windows và không có kết nối tải gói.
+- Không thay đổi Apps Script đang triển khai, không gửi biểu mẫu thử trên hệ thống thật, chưa triển khai cập nhật lên Vercel/GitHub Pages.
+- Xem chi tiết [`REVIEW_UPDATE_2026-11-15.md`](REVIEW_UPDATE_2026-11-15.md).
+
+---
+
 # Trạng thái dự án Luuiw
 
 Cập nhật: 2026-09-30 (Asia/Ho_Chi_Minh)

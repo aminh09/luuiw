@@ -53,23 +53,23 @@ export function Hero() {
               </div>
               <span className="live-status-pill">
                 <span className="dot-pulse" />
-                Trực tuyến 8:00–24:00
+                Tiếp nhận 8:00–24:00
               </span>
             </div>
 
             {/* Metrics Row */}
             <div className="dashboard-metrics-grid">
               <div className="metric-chip">
-                <span className="metric-val">13+</span>
+                <span className="metric-val">13</span>
                 <span className="metric-lbl">Chuyên đề hỗ trợ</span>
               </div>
               <div className="metric-chip">
-                <span className="metric-val">&lt; 20%</span>
-                <span className="metric-lbl">Chuẩn Turnitin/DoIT</span>
+                <span className="metric-val">5</span>
+                <span className="metric-lbl">Công cụ tham khảo</span>
               </div>
               <div className="metric-chip">
-                <span className="metric-val">100%</span>
-                <span className="metric-lbl">Bảo mật sinh viên</span>
+                <span className="metric-val">6</span>
+                <span className="metric-lbl">Bước thực hiện</span>
               </div>
             </div>
 
@@ -95,7 +95,7 @@ export function Hero() {
                 <div className="step-line step--active" />
                 <div className="step-item step--active">
                   <span className="step-bullet">2</span>
-                  <span className="step-text">Rà soát đạo văn</span>
+                  <span className="step-text">Rà soát nội dung</span>
                 </div>
                 <div className="step-line" />
                 <div className="step-item">
@@ -107,7 +107,7 @@ export function Hero() {
 
             {/* Quick feature tags */}
             <div className="dashboard-quick-tags">
-              <span className="tag-pill"><Icon name="scan" size={13} /> Check đạo văn</span>
+              <span className="tag-pill"><Icon name="scan" size={13} /> Rà soát văn bản</span>
               <span className="tag-pill"><Icon name="quote" size={13} /> Trích dẫn APA 7</span>
               <span className="tag-pill"><Icon name="calculator" size={13} /> Tính GPA hệ 4</span>
             </div>
@@ -124,7 +124,7 @@ export function Hero() {
             <Icon name="shield" size={18} />
             <div className="floating-text">
               <small>Tài liệu &amp; Ý tưởng</small>
-              <strong>Bảo mật riêng tư 100%</strong>
+              <strong>Tôn trọng tính riêng tư</strong>
             </div>
           </div>
         </div>

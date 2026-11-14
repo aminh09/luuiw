@@ -26,8 +26,9 @@ function createRequestToken(): string {
 
 function isAllowedAppsScriptOrigin(origin: string): boolean {
   try {
-    const hostname = new URL(origin).hostname
-    return (
+    const parsed = new URL(origin)
+    const hostname = parsed.hostname
+    return parsed.protocol === 'https:' && (
       hostname === 'script.google.com' ||
       hostname === 'script.googleusercontent.com' ||
       hostname.endsWith('.googleusercontent.com')

@@ -19,6 +19,7 @@ const DRAFT_KEY = 'luuiw-request-draft-v1'
 interface RequestFormProps {
   selectedService: Service | null
   onServiceChange: (service: Service | null) => void
+  estimatorBudget?: { value: string } | null
 }
 
 type SubmitState =
@@ -41,11 +42,16 @@ function loadDraft(): RequestFormData {
 export function RequestForm({
   selectedService,
   onServiceChange,
+  estimatorBudget,
 }: RequestFormProps) {
-  const [data, setData] = useState<RequestFormData>(loadDraft)
+  const [data, setData] = useState<RequestFormData>(() => ({
+    ...loadDraft(),
+    ...(estimatorBudget ? { budget: estimatorBudget.value } : {}),
+  }))
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const isConfigured = Boolean(siteConfig.appsScriptUrl)
+
 
   const effectiveService = selectedService?.id ?? data.service
   const effectiveData = useMemo(
@@ -112,10 +118,9 @@ export function RequestForm({
     const nextErrors = validateRequestForm(effectiveData)
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) {
+      const formElement = event.currentTarget
       window.requestAnimationFrame(() => {
-        event.currentTarget
-          .querySelector<HTMLElement>('[aria-invalid="true"]')
-          ?.focus()
+        formElement.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
       })
       return
     }
@@ -304,7 +309,20 @@ export function RequestForm({
               </a>
             </div>
           )}
-          <p className="form-footnote">Website không tải file trực tiếp. Không gửi mật khẩu, thông tin tài chính hoặc dữ liệu nhạy cảm trong mô tả.</p>
+          <p className="form-footnote">Website không tải file trực tiếp. Bản nháp được lưu trên thiết bị này cho đến khi gửi thành công hoặc bạn xóa. Không gửi mật khẩu, thông tin tài chính hoặc dữ liệu nhạy cảm trong mô tả.</p>
+          <button
+            className="text-button"
+            onClick={() => {
+              setData({ ...emptyRequestForm })
+              setErrors({})
+              setSubmitState({ status: 'idle' })
+              onServiceChange(null)
+              localStorage.removeItem(DRAFT_KEY)
+            }}
+            type="button"
+          >
+            Xóa nội dung và bản nháp
+          </button>
         </form>
       </div>
     </section>

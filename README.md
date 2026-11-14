@@ -1,8 +1,9 @@
 # Luuiw
 
-Website dịch vụ hỗ trợ học tập và sản phẩm số dành cho sinh viên, được xây bằng Vite, React và TypeScript. Chủ sở hữu: Anh Minh.
+Website Luuiw Student Lab hỗ trợ học tập và sản phẩm số cho sinh viên, sử dụng React 19, TypeScript 6 và Vite 8. Bản rà soát source: **2.2.1 (15/11/2026)**. Chủ sở hữu: Anh Minh.
 
-- Website: <https://aminh09.github.io/luuiw/>
+- Website chính theo tài liệu cung cấp: <https://luuiw.vercel.app/>
+- GitHub Pages (bản triển khai song song): <https://aminh09.github.io/luuiw/>
 - Mã nguồn: <https://github.com/aminh09/luuiw>
 
 ## Tính năng giai đoạn 1
@@ -14,14 +15,16 @@ Website dịch vụ hỗ trợ học tập và sản phẩm số dành cho sinh 
 - Widget liên hệ Zalo, Messenger, Facebook, Instagram và email.
 - Chính sách quyền riêng tư, điều khoản và nội dung học thuật có trách nhiệm.
 - Responsive, keyboard-friendly và hỗ trợ reduced motion.
-- GitHub Actions deploy GitHub Pages.
+- Bộ 5 công cụ miễn phí: rà soát cách diễn đạt nội bộ (không đo tỷ lệ đạo văn), tính GPA, tạo nháp trích dẫn, ước tính thuyết trình và chi phí.
+- GitHub Actions triển khai GitHub Pages; có `vercel.json` để hỗ trợ triển khai trên Vercel.
+- Lưu bản nháp form tại trình duyệt, có nút xóa nội dung và bản nháp.
 
 ## Chạy local
 
-Yêu cầu Node.js 22.12+ hoặc 24+ và npm.
+Yêu cầu **Node.js 22.22.2+ hoặc 24.15.0+** và npm (khuyến nghị Node 24 mới, do yêu cầu của các phụ thuộc hiện tại).
 
 ```powershell
-npm install
+npm ci
 Copy-Item .env.example .env.local
 npm run dev
 ```
@@ -58,7 +61,7 @@ src/lib/                 Validation và transport form
 
 ## GitHub Pages
 
-Vite dùng base `/luuiw/`. Workflow Pages build bằng `npm ci` và lấy `VITE_APPS_SCRIPT_URL` từ repository variable cùng tên.
+Vite dùng đường dẫn asset tương đối (`base: './'`) để hoạt động ở Vercel và GitHub Pages. Workflow Pages build bằng `npm ci` và lấy `VITE_APPS_SCRIPT_URL` từ repository variable cùng tên.
 
 ## Tài liệu
 
@@ -67,7 +70,11 @@ Vite dùng base `/luuiw/`. Workflow Pages build bằng `npm ci` và lấy `VITE_
 - [`STATUS.md`](STATUS.md) — tiến độ, quyết định và vấn đề còn lại.
 - [`ROADMAP.md`](ROADMAP.md) — hạng mục giai đoạn 2.
 - [`CONTENT_GUIDE.md`](CONTENT_GUIDE.md) — chỉnh nội dung.
+- [`REVIEW_UPDATE_2026-11-15.md`](REVIEW_UPDATE_2026-11-15.md) — lỗi và thay đổi bản 2.2.1.
+- [`ARCHITECTURE_CURRENT.md`](ARCHITECTURE_CURRENT.md) — đối chiếu kiến trúc source thực tế với báo cáo 2.2.0.
 
 ## Lưu ý
 
 Luuiw hỗ trợ học tập, hướng dẫn, trình bày và hoàn thiện kỹ thuật; không làm hộ bài thi, không giả mạo danh tính và không cam kết điểm số.
+
+**Lưu ý về kiểm thử và triển khai:** Gói ZIP chứa source, không chứa `node_modules`, `.git` hoặc `dist`; sau khi giải nén cần chạy `npm ci`. Nếu chạy từ Windows sang Linux/macOS phải cài lại thư viện để tải đúng bản native theo hệ điều hành. Chưa có xác nhận gửi form end-to-end trên bản production mới; việc cập nhật mã nguồn không tự động cập nhật website đang chạy.
