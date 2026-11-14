@@ -38,14 +38,18 @@ export interface PortfolioItem {
 }
 
 export type IconName =
+  | 'alert'
   | 'arrow-right'
   | 'book'
   | 'briefcase'
+  | 'calculator'
+  | 'chart'
   | 'check'
   | 'chevron-down'
   | 'clock'
   | 'close'
   | 'code'
+  | 'copy'
   | 'database'
   | 'document'
   | 'external'
@@ -56,6 +60,9 @@ export type IconName =
   | 'menu'
   | 'message'
   | 'palette'
+  | 'quote'
+  | 'refresh'
+  | 'scan'
   | 'search'
   | 'send'
   | 'shield'
@@ -63,3 +70,4 @@ export type IconName =
   | 'table'
   | 'user'
   | 'zalo'
+  | 'zap'

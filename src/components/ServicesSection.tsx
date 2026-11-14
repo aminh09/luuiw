@@ -45,10 +45,41 @@ export function ServicesSection({
     <section className="section services-section" id="dich-vu">
       <div className="container">
         <SectionHeading
-          eyebrow="Dịch vụ"
-          title="Chọn đúng hỗ trợ bạn đang cần"
+          badge="13 dịch vụ tiêu chuẩn"
           description="Mỗi yêu cầu được xem xét riêng. Phạm vi, thời gian và chi phí chỉ được chốt sau khi Luuiw đã đọc đủ thông tin."
+          eyebrow="Danh mục Dịch vụ"
+          title="Chọn đúng hỗ trợ bạn đang cần"
         />
+
+        {/* Category Pills Bar (Quick 1-click filter) */}
+        <div aria-label="Bộ lọc danh mục nhanh" className="category-pills-bar" role="tablist">
+          <button
+            aria-selected={group === 'Tất cả'}
+            className={`category-pill ${group === 'Tất cả' ? 'is-active' : ''}`}
+            onClick={() => setGroup('Tất cả')}
+            role="tab"
+            type="button"
+          >
+            <span>Tất cả</span>
+            <small>({services.length})</small>
+          </button>
+          {serviceGroups.map((g) => {
+            const count = services.filter((s) => s.group === g).length
+            return (
+              <button
+                aria-selected={group === g}
+                className={`category-pill ${group === g ? 'is-active' : ''}`}
+                key={g}
+                onClick={() => setGroup(g)}
+                role="tab"
+                type="button"
+              >
+                <span>{g}</span>
+                <small>({count})</small>
+              </button>
+            )
+          })}
+        </div>
 
         <div className="service-tools">
           <label className="search-field">
@@ -56,7 +87,7 @@ export function ServicesSection({
             <Icon name="search" size={20} />
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Tìm theo tên hoặc nhu cầu..."
+              placeholder="Tìm theo tên dịch vụ, môn học hoặc từ khóa (ví dụ: Word, SQL, Slide, UML)..."
               type="search"
               value={query}
             />
@@ -64,10 +95,16 @@ export function ServicesSection({
           <label className="filter-field">
             <span className="sr-only">Lọc theo nhóm dịch vụ</span>
             <Icon name="filter" size={19} />
-            <select value={group} onChange={(event) => setGroup(event.target.value)}>
-              <option>Tất cả</option>
+            <select
+              aria-label="Chọn nhóm dịch vụ"
+              onChange={(event) => setGroup(event.target.value)}
+              value={group}
+            >
+              <option value="Tất cả">Tất cả nhóm dịch vụ</option>
               {serviceGroups.map((item) => (
-                <option key={item}>{item}</option>
+                <option key={item} value={item}>
+                  {item}
+                </option>
               ))}
             </select>
             <Icon name="chevron-down" size={17} />
@@ -75,7 +112,11 @@ export function ServicesSection({
         </div>
 
         <div className="service-results" aria-live="polite">
-          <span>{filteredServices.length} dịch vụ phù hợp</span>
+          <span className="results-badge">
+            <Icon name="check" size={16} />
+            <strong>{filteredServices.length} dịch vụ phù hợp</strong>
+            {group !== 'Tất cả' && <small>thuộc nhóm {group}</small>}
+          </span>
           {(query || group !== 'Tất cả') && (
             <button
               className="text-button"
