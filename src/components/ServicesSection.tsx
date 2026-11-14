@@ -84,51 +84,34 @@ export function ServicesSection({
         <div className="service-tools">
           <label className="search-field">
             <span className="sr-only">Tìm kiếm dịch vụ</span>
-            <Icon name="search" size={20} />
+            <Icon name="search" size={19} />
             <input
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Tìm theo tên dịch vụ, môn học hoặc từ khóa (ví dụ: Word, SQL, Slide, UML)..."
+              placeholder="Tìm theo tên dịch vụ, môn học, kỹ năng (ví dụ: Tiểu luận, SQL, Slide, UML, Python)..."
               type="search"
               value={query}
             />
           </label>
-          <label className="filter-field">
-            <span className="sr-only">Lọc theo nhóm dịch vụ</span>
-            <Icon name="filter" size={19} />
-            <select
-              aria-label="Chọn nhóm dịch vụ"
-              onChange={(event) => setGroup(event.target.value)}
-              value={group}
-            >
-              <option value="Tất cả">Tất cả nhóm dịch vụ</option>
-              {serviceGroups.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <Icon name="chevron-down" size={17} />
-          </label>
-        </div>
 
-        <div className="service-results" aria-live="polite">
-          <span className="results-badge">
-            <Icon name="check" size={16} />
-            <strong>{filteredServices.length} dịch vụ phù hợp</strong>
-            {group !== 'Tất cả' && <small>thuộc nhóm {group}</small>}
-          </span>
-          {(query || group !== 'Tất cả') && (
-            <button
-              className="text-button"
-              onClick={() => {
-                setQuery('')
-                setGroup('Tất cả')
-              }}
-              type="button"
-            >
-              Xóa bộ lọc
-            </button>
-          )}
+          <div className="service-results" aria-live="polite">
+            <span className="results-badge">
+              <Icon name="check" size={15} />
+              <strong>{filteredServices.length} dịch vụ phù hợp</strong>
+              {group !== 'Tất cả' && <small>({group})</small>}
+            </span>
+            {(query || group !== 'Tất cả') && (
+              <button
+                className="text-button"
+                onClick={() => {
+                  setQuery('')
+                  setGroup('Tất cả')
+                }}
+                type="button"
+              >
+                Đặt lại
+              </button>
+            )}
+          </div>
         </div>
 
         {filteredServices.length > 0 ? (
